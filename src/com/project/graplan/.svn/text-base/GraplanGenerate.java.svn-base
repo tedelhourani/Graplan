@@ -1,0 +1,27 @@
+/*
+ * Copyright (C) 2011 Theodore Elhourani - ECE 573 
+ * Project: Graplan
+ * 
+ * Class generates the next graph based on current
+ * 
+ */
+
+package com.project.graplan;
+
+import android.os.Bundle;
+
+/*
+ * class generates the next graph by adding an edge to the current one
+ *  and randomizing the location of the vertices in the view
+ * 
+ */
+public class GraplanGenerate {
+
+	/** static method generates the next graph**/
+	static Bundle generateNext(Bundle currentGraph){
+		Bundle newGraph = new Bundle();
+		
+		return newGraph;
+	}
+	
+}

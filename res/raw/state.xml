@@ -1,0 +1,250 @@
+
+<Challenges
+    color="#483d8b"
+    >
+    
+  <Challenge 
+    difficulty="0"
+    fileName="challenge-0.xml"
+    solved="false"
+  />   
+
+  <Challenge 
+    difficulty="1"
+    fileName="challenge-1.xml"
+    solved="false"
+  />   
+ 
+  <Challenge 
+    difficulty="2"
+    fileName="challenge-2.xml"
+    solved="false"
+  />   
+
+ <Challenge 
+    difficulty="3"
+    fileName="challenge-3.xml"
+    solved="false"
+ />   
+ 
+  <Challenge 
+    difficulty="4"
+    fileName="challenge-4.xml"
+    solved="false"
+  />   
+ 
+   <Challenge 
+    difficulty="5"
+    fileName="challenge-5.xml"
+    solved="false"
+  />   
+ 
+  <Challenge 
+    difficulty="6"
+    fileName="challenge-6.xml"
+    solved="false"
+  />   
+
+ <Challenge 
+    difficulty="7"
+    fileName="challenge-7.xml"
+    solved="false"
+ />   
+ 
+  <Challenge 
+    difficulty="8"
+    fileName="challenge-8.xml"
+    solved="false"
+  /> 
+ 
+  <Challenge 
+    difficulty="9"
+    fileName="challenge-9.xml"
+    solved="false"
+  />   
+
+ <Challenge 
+    difficulty="10"
+    fileName="challenge-10.xml"
+    solved="false"
+ />   
+ 
+  <Challenge 
+    difficulty="11"
+    fileName="challenge-11.xml"
+    solved="false"
+  />
+   <Challenge 
+    difficulty="12"
+    fileName="challenge-12.xml"
+    solved="false"
+  />   
+
+ <Challenge 
+    difficulty="13"
+    fileName="challenge-13.xml"
+    solved="false"
+ />   
+ 
+  <Challenge 
+    difficulty="14"
+    fileName="challenge-14.xml"
+    solved="false"
+  />
+   <Challenge 
+    difficulty="15"
+    fileName="challenge-16.xml"
+    solved="false"
+  />   
+
+ <Challenge 
+    difficulty="16"
+    fileName="challenge-16.xml"
+    solved="false"
+ />   
+ 
+  <Challenge 
+    difficulty="17"
+    fileName="challenge-17.xml"
+    solved="false"
+  />
+  
+  
+  
+  
+  
+  
+   <Challenge 
+    difficulty="18"
+    fileName="challenge-18.xml"
+    solved="false"
+ />   
+ 
+  <Challenge 
+    difficulty="19"
+    fileName="challenge-19.xml"
+    solved="false"
+  />
+   <Challenge 
+    difficulty="20"
+    fileName="challenge-20.xml"
+    solved="false"
+  />   
+
+ <Challenge 
+    difficulty="21"
+    fileName="challenge-21.xml"
+    solved="false"
+ />   
+ 
+  <Challenge 
+    difficulty="22"
+    fileName="challenge-22.xml"
+    solved="false"
+  />
+  
+  
+  
+  
+  
+   <Challenge 
+    difficulty="23"
+    fileName="challenge-23.xml"
+    solved="false"
+ />   
+ 
+  <Challenge 
+    difficulty="24"
+    fileName="challenge-24.xml"
+    solved="false"
+  />
+   <Challenge 
+    difficulty="25"
+    fileName="challenge-25.xml"
+    solved="false"
+  />   
+
+ <Challenge 
+    difficulty="26"
+    fileName="challenge-26.xml"
+    solved="false"
+ />   
+ 
+  <Challenge 
+    difficulty="27"
+    fileName="challenge-27.xml"
+    solved="false"
+  />
+  
+  
+  
+  
+    <Challenge 
+    difficulty="28"
+    fileName="challenge-28.xml"
+    solved="false"
+ />   
+ 
+  <Challenge 
+    difficulty="29"
+    fileName="challenge-29.xml"
+    solved="false"
+  />
+   <Challenge 
+    difficulty="30"
+    fileName="challenge-30.xml"
+    solved="false"
+  />   
+
+ <Challenge 
+    difficulty="31"
+    fileName="challenge-31.xml"
+    solved="false"
+ />   
+ 
+  <Challenge 
+    difficulty="32"
+    fileName="challenge-32.xml"
+    solved="false"
+  />
+  
+  
+  
+  
+  
+   <Challenge 
+    difficulty="33"
+    fileName="challenge-33.xml"
+    solved="false"
+ />   
+ 
+  <Challenge 
+    difficulty="34"
+    fileName="challenge-34.xml"
+    solved="false"
+  />
+   <Challenge 
+    difficulty="35"
+    fileName="challenge-35.xml"
+    solved="false"
+  />   
+
+ <Challenge 
+    difficulty="36"
+    fileName="challenge-36.xml"
+    solved="false"
+ />   
+ 
+  <Challenge 
+    difficulty="37"
+    fileName="challenge-37.xml"
+    solved="false"
+  />
+  
+  <Challenge 
+    difficulty="38"
+    fileName="challenge-38.xml"
+    solved="false"
+  />
+  
+ </Challenges>

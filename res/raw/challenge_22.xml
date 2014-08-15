@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Challenge>
+<Vertices color="#483d8b">
+<Vertex id ="1" x="6" y="38" />
+<Vertex id ="2" x="27" y="1" />
+<Vertex id ="3" x="30" y="1" />
+<Vertex id ="4" x="20" y="5" />
+<Vertex id ="5" x="9" y="32" />
+<Vertex id ="6" x="30" y="26" />
+<Vertex id ="7" x="2" y="23" />
+<Vertex id ="8" x="10" y="38" />
+</Vertices>
+
+<Edges color="#483d8b">
+<Edge first_end="1"  second_end="4" color="#483d8b"/>
+<Edge first_end="1"  second_end="7" color="#483d8b"/>
+<Edge first_end="1"  second_end="8" color="#483d8b"/>
+<Edge first_end="2"  second_end="1" color="#483d8b"/>
+<Edge first_end="2"  second_end="4" color="#483d8b"/>
+<Edge first_end="2"  second_end="5" color="#483d8b"/>
+<Edge first_end="2"  second_end="6" color="#483d8b"/>
+<Edge first_end="2"  second_end="8" color="#483d8b"/>
+<Edge first_end="3"  second_end="6" color="#483d8b"/>
+<Edge first_end="3"  second_end="7" color="#483d8b"/>
+<Edge first_end="3"  second_end="8" color="#483d8b"/>
+<Edge first_end="4"  second_end="3" color="#483d8b"/>
+<Edge first_end="4"  second_end="5" color="#483d8b"/>
+<Edge first_end="4"  second_end="7" color="#483d8b"/>
+<Edge first_end="5"  second_end="1" color="#483d8b"/>
+</Edges>
+
+<Metadata level="22" />
+
+ <CurrentSteps
+ steps="0"
+ />
+ 
+ <RecordSteps
+ steps="Inf"
+ />
+ 
+</Challenge>

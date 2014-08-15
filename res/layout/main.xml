@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:shrinkColumns="true" android:clipChildren="true"
+	android:gravity="center" android:maxWidth="10dip" android:minWidth="10dip">
+
+	<ImageView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:src="@drawable/scaled"
+		android:layout_gravity="center" android:maxHeight="20.0sp"
+		android:minHeight="9.0sp" />
+
+	<TableRow>
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="fill_parent" android:textSize="40dip"
+			android:textColor="#483d8b" android:textStyle="bold"
+			android:layout_gravity="center_horizontal" android:gravity="center"
+			android:layout_weight=".5" />
+	</TableRow>
+
+	<TableRow>
+
+		<Button android:id="@+id/play" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="play"
+			android:textSize="12dip" android:textColor="#483d8b"
+			android:textStyle="bold" android:width="0px" android:layout_weight="0.5"
+			android:layout_gravity="center" />
+
+		<!-- <Button android:id="@+id/new_challenge" android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" android:text="new challenge" android:textSize="12dip" 
+			android:textColor="#483d8b" android:textStyle="bold" android:width="0px" 
+			android:layout_weight="0.5" android:layout_gravity="center" /> -->
+
+	</TableRow>
+
+
+	<TableRow>
+
+		<!-- <Button android:id="@+id/set_difficulty_level" android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" android:text="set difficulty level" 
+			android:textSize="12dip" android:textColor="#483d8b" android:textStyle="bold" 
+			android:width="0px" android:layout_weight="0.5" android:layout_gravity="center" 
+			/> <EditText android:id="@+id/entry" android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" android:textColor="#483d8b" android:textStyle="bold" 
+			android:width="0px" android:layout_weight="0.5" android:layout_gravity="center" 
+			/> -->
+
+	</TableRow>
+
+
+	<TableRow>
+
+		<Button android:id="@+id/planar" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="planar"
+			android:textSize="12dip" android:textColor="#483d8b"
+			android:textStyle="bold" android:width="0px" android:layout_weight="0.5"
+			android:layout_gravity="center" />
+
+		<Button android:id="@+id/non_planar" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="non-planar"
+			android:textSize="12dip" android:textColor="#483d8b"
+			android:textStyle="bold" android:width="0px" android:layout_weight="0.5"
+			android:layout_gravity="center" />
+
+	</TableRow>
+
+
+	<TableRow>
+
+		<!-- <Button android:id="@+id/save_and_quit" android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" android:text="save and quit" android:textSize="12dip" 
+			android:textColor="#483d8b" android:textStyle="bold" android:width="0px" 
+			android:layout_weight="0.5" android:layout_gravity="center" /> -->
+
+		<Button android:id="@+id/quit" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="quit"
+			android:textSize="12dip" android:textColor="#483d8b"
+			android:textStyle="bold" android:width="0px" android:layout_weight="0.5"
+			android:layout_gravity="center" />
+		<TextView android:id="@+id/level" android:layout_width="fill_parent"
+			android:layout_height="fill_parent" android:textSize="24dip"
+			android:textColor="#483d8b" android:textStyle="bold"
+			android:layout_gravity="center_horizontal" android:gravity="center"
+			android:layout_weight=".5" />
+	</TableRow>
+
+
+
+</TableLayout>

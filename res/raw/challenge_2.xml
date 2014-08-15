@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Challenge >
+
+<Vertices
+    color="#483d8b"
+    >
+    
+ <Vertex 
+    id="1"
+    x="12"
+    y="12"
+ />   
+ <Vertex 
+    id="2"
+    x="14"
+    y="17"
+ />   
+ 
+  <Vertex 
+    id="3"
+    x="20"
+    y="17"
+ />  
+ </Vertices>
+ 
+ 
+ 
+ <Edges
+  color="#483d8b"
+  >
+ 
+ <Edge
+   first_end="1"
+   second_end="2"
+   color="#483d8b"
+ />
+
+ <Edge
+   first_end="1"
+   second_end="3"
+   color="#483d8b"
+ />
+
+ 
+ <Edge
+   first_end="2"
+   second_end="3"
+   color="#483d8b"
+ />
+ 
+ 
+  </Edges>
+ 
+ 
+ <Metadata
+ level="2"
+ />
+ 
+  <CurrentSteps
+ steps="0"
+ />
+ 
+ <RecordSteps
+ steps="Inf"
+ />
+ 
+ </Challenge>

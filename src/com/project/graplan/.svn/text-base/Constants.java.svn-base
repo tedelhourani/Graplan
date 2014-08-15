@@ -1,0 +1,30 @@
+/*
+ * Copyright (C) 2011 Theodore Elhourani - ECE 573 
+ * Project: Graplan
+ * 
+ * constants class
+ * 
+ */
+
+package com.project.graplan;
+
+public class Constants {
+	
+	private Constants(){}
+	
+	final static public int MAIN_MENU_VIEW_REQUEST = 10;
+	final static public int GRAPH_ACTIVITY_REQUEST = 11;
+	final static public int WAIT_FOR_INPUT = 20;
+	final static public int PLAYING = 21;
+	
+	final static public int QUIT = 0;
+	final static public int PLAY = 1;
+	final static public int PLANAR = 2;
+	final static public int NON_PLANAR = 3;
+	final static public int SAVE_AND_QUIT = 4;
+	final static public int NEW_CHALLENGE = 5;
+	final static public int SET_DIFFICULTY_LEVEL = 6;
+	
+	final static public String ACTION = "ACTION";
+	
+}

@@ -1,0 +1,22 @@
+/*
+ * Copyright (C) 2011 Theodore Elhourani - ECE 573 
+ * Project: Graplan
+ * 
+ * Class checks for intersecting edges
+ * 
+ */
+
+package com.project.graplan;
+
+import android.os.Bundle;
+
+public class GraplanIntersectionCheck {
+	
+	static boolean hasIntersectingEdges(Bundle graph){
+		boolean intersections = true;
+		
+		
+		return intersections;
+	}
+
+}

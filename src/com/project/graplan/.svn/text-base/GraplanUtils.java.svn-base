@@ -1,0 +1,194 @@
+/*
+ * Copyright (C) 2011 Theodore Elhourani - ECE 573 
+ * Project: Graplan
+ * 
+ * utility methods for reading and writing to xml files
+ * 
+ */
+package com.project.graplan;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.Vector;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import android.os.Bundle;
+
+public class GraplanUtils {
+	
+	public GraplanUtils(){
+	}
+	
+	public XmlPullParser getXmlPullParser(String xmlFile){
+
+		FileInputStream fileInputStream = null;
+		try {
+			fileInputStream = new FileInputStream ( xmlFile );
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		InputStreamReader inputStreamReader = null;
+		inputStreamReader =	new InputStreamReader(fileInputStream);
+
+		
+		XmlPullParserFactory factory = null;
+		try {
+			factory = XmlPullParserFactory.newInstance();
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		factory.setNamespaceAware(true);
+		XmlPullParser parser = null;
+		try {
+			parser = factory.newPullParser();
+		} catch (XmlPullParserException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			parser.setInput(inputStreamReader);
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return parser;
+	}
+	
+	
+	public Hashtable<String, String> xmlUnsolvedChallengeList(String xmlFile){
+		Hashtable<String, String>  challengeList = new Hashtable<String, String>();
+		
+		XmlPullParser xpp = getXmlPullParser( xmlFile );
+		
+		try {
+			while (xpp.getEventType()!=XmlPullParser.END_DOCUMENT) {
+				if (xpp.getEventType()==XmlPullParser.START_TAG) {
+					
+					if(xpp.getName().equals("Challenge")) {
+						String difficulty = xpp.getAttributeValue(0);
+						String fileName   = xpp.getAttributeValue(1);
+						String solved     = xpp.getAttributeValue(2);
+						
+						if( solved.equals("false"))
+							challengeList.put(fileName,difficulty);
+					}
+
+				}
+				xpp.next();
+			}
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return challengeList;
+	}
+
+	public LinkedList<int[]> xmlChallengeToEdgeArrays(String xmlFile){
+		LinkedList<int[]> graph = new LinkedList<int[]>();
+		Vector<String> tails = new Vector<String>();
+		Vector<String> heads = new Vector<String>();
+
+		XmlPullParser xpp = getXmlPullParser( xmlFile );
+
+		try {
+			while (xpp.getEventType()!=XmlPullParser.END_DOCUMENT) {
+				if (xpp.getEventType()==XmlPullParser.START_TAG) {
+					
+					if(xpp.getName().equals("Edge")) {
+						String firstVertex = xpp.getAttributeValue(0);
+						String secondVertex = xpp.getAttributeValue(1);
+						tails.add( firstVertex  );
+						heads.add( secondVertex );
+					}
+
+				}
+				xpp.next();
+			}
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+		int[] headsArray = new int[heads.size()];
+		int[] tailsArray = new int[tails.size()];
+
+		// -1 because the boost library is zero indexed
+		for(int i = 0 ; i < heads.size(); i++){
+			headsArray[i] = new Integer((String)heads.get(i)).intValue() - 1;
+			tailsArray[i] = new Integer((String)tails.get(i)).intValue() - 1;
+		}
+
+		graph.add(tailsArray);
+
+		graph.add(headsArray);
+
+		return graph;
+	}
+
+
+	public Bundle xmlChallengeToBundle(String xmlFile){
+		Bundle bundle = new Bundle();
+		Bundle vertices = new Bundle();
+		Bundle edges = new Bundle();
+		String level = null;
+		
+		XmlPullParser xpp = getXmlPullParser( xmlFile );
+
+		try {
+			while (xpp.getEventType()!=XmlPullParser.END_DOCUMENT) {
+				if (xpp.getEventType()==XmlPullParser.START_TAG) {
+					if (xpp.getName().equals("Vertex")) {
+						String name = xpp.getAttributeValue(0);
+						String x    = xpp.getAttributeValue(1);
+						String y    = xpp.getAttributeValue(2);
+						vertices.putString(name, x+","+y);
+					}
+
+					if(xpp.getName().equals("Edge")) {
+						String firstVertex = xpp.getAttributeValue(0);
+						String secondVertex = xpp.getAttributeValue(1);
+						String x    = xpp.getAttributeValue(1);
+						String y    = xpp.getAttributeValue(2);
+						edges.putString(firstVertex+","+secondVertex, x+","+y);
+					}
+					
+					if(xpp.getName().equals("Metadata")) {
+						level = xpp.getAttributeValue(0);
+					}
+
+				}
+				xpp.next();
+			}
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		bundle.putInt("level", new Integer(level).intValue());
+		bundle.putBundle("vertices", vertices);
+		bundle.putBundle("edges", edges);
+
+		return bundle;
+	}
+
+}

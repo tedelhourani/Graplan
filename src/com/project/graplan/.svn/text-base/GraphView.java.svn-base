@@ -1,0 +1,228 @@
+/*
+ * Copyright (C) 2011 Theodore Elhourani - ECE 573 
+ * Project: Graplan
+ * 
+ * The graph drawing class
+ * 
+ */
+
+package com.project.graplan;
+
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.os.Bundle;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+
+
+/**
+ * GraphView
+ *        
+ **/
+public class GraphView extends SurfaceView implements SurfaceHolder.Callback {
+
+	
+	/**
+     * Canvas Thread is responsible for all components of display
+     **/
+	class CanvasThread extends Thread {
+		private SurfaceHolder surfaceHolder;
+		private int canvasWidth, canvasHeight;
+		private boolean run = false;
+
+		private String text = "Hello";
+		private float elevation = -1.0f;
+		private final float RADIUS = 8.0f;
+		private final float SCALING = 10;
+
+		public CanvasThread(SurfaceHolder surfaceHolder, Context context) {
+			this.surfaceHolder = surfaceHolder;
+		}
+
+		public void setRunning(boolean run) {
+			this.run = run;
+		}
+		
+		/**
+		 * 
+		 * Constantly redraws 
+	     *        
+	     **/
+		@Override
+		public void run() {
+			Canvas c;
+			while (run) {
+				c = null;
+				try {
+					c = surfaceHolder.lockCanvas(null);
+					synchronized (surfaceHolder) {
+						doDraw(c, elevation ,text);
+					}
+				} finally {
+					if (c != null) {
+						surfaceHolder.unlockCanvasAndPost(c);
+					}
+				}
+			}
+		}
+
+		public void setSurfaceSize(int width, int height) {
+			// TODO Auto-generated method stub
+			synchronized (surfaceHolder) {
+				canvasWidth = width;
+				canvasHeight = height;
+			}
+		}
+
+		private void doDraw(Canvas canvas, float elevation, String text) {
+			synchronized(surfaceHolder){
+				Paint paint = new Paint();
+				
+				// set paint's text style
+				paint.setStyle(Paint.Style.FILL);
+				paint.setAntiAlias(true);
+				paint.setColor(Color.WHITE);
+				paint.setTextSize(14);
+				
+				Iterator<String> keys =  vertices.keySet().iterator();
+				while( keys.hasNext() )
+				{
+					String vertex = keys.next();
+					String position = vertices.get( vertex );
+					String[] xy = position.split(",");
+					int cx = new Integer(xy[0]).intValue();
+					int cy = new Integer(xy[1]).intValue();
+					
+					//Log.v("GraphView Message ", " Drawing vertex "+cx+" ,"+cy);
+					canvas.drawCircle((float) cx * SCALING,
+		                       (float) cy * SCALING,
+		                       RADIUS,
+		                       paint);
+				}
+				
+				Iterator<String> edgekeys = edges.keySet().iterator();
+				while( edgekeys.hasNext() )
+					/*
+					 * Copyright (C) 2011 Theodore Elhourani - ECE 573 
+					 * Project: Graplan
+					 * 
+					 * Central activity controlling all other activities
+					 * 
+					 */	{
+					String edge  = edgekeys.next();
+					String[ ] ends = edge.split(",");
+					String first = ends[0];
+					String second = ends[1];
+					
+					String position = vertices.get( first );
+					String[] xy = position.split(",");
+					int startX = new Integer(xy[0]).intValue();
+					int startY = new Integer(xy[1]).intValue();
+			
+					
+					position = vertices.get( second );
+					xy = position.split(",");
+					int stopX = new Integer(xy[0]).intValue();
+					int stopY = new Integer(xy[1]).intValue();
+			
+					//Log.v("GraphView Message ", " Drawing vertex "+startX+" ,"+startY);
+
+					
+					canvas.drawLine(startX * SCALING, startY * SCALING, stopX * SCALING, stopY *SCALING, paint);
+				}
+				
+				
+				canvas.drawText("Escape to Exit", 100, 400, paint);
+				canvas.drawText("Difficulty Level "+difficultyLevel,100,420, paint);
+			}
+		}
+
+
+	}
+
+	/**  **/
+	CanvasThread canvasthread;
+
+	private Hashtable<String,String> vertices;
+	private Hashtable<String,String> edges;
+	private int difficultyLevel;
+	
+	/**
+     * creates the canvas thread that we use for displaying everything, absolutely everything      
+     **/
+	public GraphView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		// TODO Auto-generated constructor stub
+		SurfaceHolder holder = getHolder();
+		holder.addCallback(this);
+		// this doesn't start the canvasthread
+		canvasthread = new CanvasThread(getHolder(), context);
+		setFocusable(true);
+	}
+
+	public void setGraph(Bundle graphInfo){
+		Bundle vs = graphInfo.getBundle("vertices");
+		Bundle es = graphInfo.getBundle("edges");
+		Set<String> v = graphInfo.getBundle("vertices").keySet();
+		Set<String> e = graphInfo.getBundle("edges").keySet();
+		
+		difficultyLevel = graphInfo.getInt("level");
+		//Log.i("Thedifflevel-----> ", difficultyLevel+"");
+
+		vertices = new Hashtable<String,String>();
+		edges    = new Hashtable<String,String>();
+		
+		Iterator<String> it = v.iterator();
+		while( it.hasNext() ){
+			String key = (String)it.next();
+			vertices.put(key, (String)vs.get(key));
+		}
+		
+		it = e.iterator();
+		while( it.hasNext() ){
+			String key = (String)it.next();
+			edges.put(key, (String)es.get(key));
+		}
+	}
+	
+	//@Override
+	public void surfaceChanged(SurfaceHolder arg0, int format, int width, int height) {
+		// TODO Auto-generated method stub
+		canvasthread.setSurfaceSize(width, height);
+	}
+
+	//@Override
+	public void surfaceCreated(SurfaceHolder arg0) {
+		// TODO Auto-generated method stub
+		canvasthread.setRunning(true);
+		// starting the canvas thread here
+		canvasthread.start();
+	}
+
+	//@Override
+	public void surfaceDestroyed(SurfaceHolder arg0) {
+		// TODO Auto-generated method stub
+		boolean retry = true;
+		canvasthread.setRunning(false);
+		while(retry) {
+			try {
+				canvasthread.join();
+				retry = false;
+			}catch(InterruptedException e){
+			}
+		}
+	}
+	
+	public int getDifficultyLevel(){
+		return difficultyLevel;
+	}
+
+}

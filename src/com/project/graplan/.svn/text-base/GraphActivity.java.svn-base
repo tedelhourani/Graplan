@@ -1,0 +1,40 @@
+/*
+ * Copyright (C) 2011 Theodore Elhourani - ECE 573 
+ * Project: Graplan
+ * 
+ * Activity that constructs the graph, uses SurfaceView class
+ * 
+ */
+
+package com.project.graplan;
+
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+
+public class GraphActivity extends Activity{
+
+	private GraphView graphView;
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.graph);
+
+        graphView = (GraphView) findViewById(R.id.GraphView);
+  
+    	Intent myIntent = getIntent();
+		Bundle graphInfo = myIntent.getExtras();
+		graphView.setGraph(graphInfo);      
+    }
+
+   
+    @Override
+    public void onBackPressed() {
+    // do something on back.
+    	setResult  (RESULT_OK);
+		finish();
+		return;
+    }
+}

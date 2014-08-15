@@ -1,0 +1,110 @@
+/*
+ * Copyright (C) 2011 Theodore Elhourani - ECE 573 
+ * Project: Graplan
+ * 
+ * Class handles all functions related to a Graplan challenge
+ * 
+ */
+
+package com.project.graplan;
+
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.LinkedList;
+import android.os.Bundle;
+
+
+/**
+ * Class handles all functions related to a Graplan challenge
+ * 
+ * Whenever a challenge is solved GraplanChallenge generates the next challenge 
+ * 
+ * @author telhoura
+ *
+ */
+public class GraplanChallenge {
+	
+	static	{
+	    System.loadLibrary("PlanarityTest");
+	}
+	
+	final private int TAILS = 0;
+	final private int HEADS = 1;
+	final private String CHALLENGE_STATE_FILE = "state.xml"; 
+	private String challengeFile;//= "challenge-0.xml";
+	private int currentDifficulty;
+	
+	private boolean challengeAvailable = true;
+	private int difficultyLevel;
+	private int maxDifficultyLevel;	
+	private static GraplanChallenge graplanChallenge = null;
+	private GraplanUtils utils;
+	final private static String directory = "/data/data/com.project.graplan/files/";
+	final private static String libDirectory = "/data/data/com.project.graplan/lib/";
+	
+	public static synchronized GraplanChallenge getInstance(String fileDirectory){
+		if( graplanChallenge == null){
+			graplanChallenge = new GraplanChallenge(fileDirectory);
+		}
+		return graplanChallenge;
+	}
+
+	public Object clone() throws CloneNotSupportedException {
+		throw new CloneNotSupportedException();
+	}
+
+	/** private constructor as this is a singleton **/
+	private GraplanChallenge(String directory){
+		//this.directory = directory;
+		utils = new GraplanUtils();
+		recoverChallengeState();
+	}
+	
+	/**  method reads the challenge state file **/
+	private void recoverChallengeState(){
+		Hashtable<String, String> unsolvedChallenges = utils.xmlUnsolvedChallengeList(directory  + CHALLENGE_STATE_FILE);
+		Enumeration<String> keyEnumeration = unsolvedChallenges.keys();
+		//if( unsolvedChallenges.size() != 1)
+		//	throw new ChallengeException();
+		while (keyEnumeration.hasMoreElements()) 
+		      challengeFile = (String) keyEnumeration.nextElement();
+		String dl = unsolvedChallenges.get(challengeFile);
+		difficultyLevel = new Integer( dl ).intValue();
+	}
+	
+	/** getter method used by test cases **/
+	public String getChallengeFile(){
+		return challengeFile;
+	}
+	
+	public int getDifficultyLevel(){
+		return difficultyLevel;
+	}
+	
+	/**  method must be called from the StateController Activity**/
+	public void saveChallengeState(){
+		
+	}
+	
+	public void setChallengeDifficultyLevel(){
+		
+	}
+
+	public Bundle getChallenge(){
+		return utils.xmlChallengeToBundle( directory + challengeFile );
+	}
+	
+	public boolean testPlanarity(){
+		LinkedList<int[]> edges;
+		edges = utils.xmlChallengeToEdgeArrays( directory + challengeFile );
+		return planar( (int[])edges.get(TAILS), (int[])edges.get(HEADS) );
+	}
+	
+	public LinkedList<int[]> getEdges(){
+		LinkedList<int[]> edges;
+		edges = utils.xmlChallengeToEdgeArrays( directory + challengeFile );
+		return edges;
+	}
+	
+	private native boolean planar(int[] tails, int[] heads);
+}
